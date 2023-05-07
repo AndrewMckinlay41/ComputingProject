@@ -10,6 +10,11 @@
       "StackName": "amplify-computingproject-dev-155201",
       "StackId": "arn:aws:cloudformation:eu-west-2:778994178717:stack/amplify-computingproject-dev-155201/ba44fcf0-ece6-11ed-8504-02a5371354a2",
       "AmplifyAppId": "d30lrsdjho3zd0"
+    },
+    "categories": {
+      "api": {
+        "computingproject": {}
+      }
     }
   }
 }
