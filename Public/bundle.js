@@ -1,0 +1,1 @@
+addEventListener("load",(e=>{document.getElementById("booking-form").addEventListener("submit",(function(e){e.preventDefault(),function(e){for(let t of e)"INPUT"!=t.tagName&&"TEXTAREA"!=t.tagName||console.log(t.name,t.value)}(e.target.children)}))}));

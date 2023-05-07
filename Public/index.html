@@ -17,6 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap"
       rel="stylesheet"
     />
+    <script src="bundle.js"></script>
   </head>
 
   <!-- Content of webpage  -->
@@ -237,7 +238,7 @@
     <section id="Bookings">
       <div class="reservation">
         <h1>Book Now!</h1>
-        <form action="process-form.php" method="post">
+        <form id="booking-form" action="process-form.php" method="post">
           <label for="fname">First Name</label>
           <input type="text" name="fname" />
           <label for="lname">Last Name</label>
