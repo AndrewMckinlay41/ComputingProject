@@ -1,7 +1,16 @@
+// Import external dependencies
+// This is the Javascript API provided by Amazon for interacting with Amplify
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import awsconfig from './aws-exports';
+import { createBookingRequest } from './graphql/mutations';
+import { listBookingRequests } from './graphql/queries';
+
 /**
  * Main function, run on page load
  */
 function main() {
+    configureAmplify();
+
     // Get the HTML element with ID `booking-form`
     let form = document.getElementById("booking-form");
 
@@ -12,24 +21,39 @@ function main() {
 
         processForm(e.target.children);
     });
+
+    let view_button = document.getElementById("view-requests");
+
+    view_button.addEventListener("click", async function(e) {
+        e.preventDefault();
+
+        let requests = await API.graphql(graphqlOperation(listBookingRequests));
+        console.log(requests);
+    })
+}
+
+function configureAmplify() {
+    Amplify.configure(awsconfig);
+    console.log(Amplify);
 }
 
 /**
  * Submits form contents to AWS Amplify
  */
-function processForm(elements) {
+async function processForm(elements) {
+    let request = {};
+
     for (let child of elements) {
         // Ignore children of the form element which are not form inputs
         if (child.tagName != "INPUT" && child.tagName != "TEXTAREA") {
             continue;
         }
 
-        // TODO:
-        // Submit booking request
-        // `child.name` has the name of the form element
-        // `child.value` has the value
-        console.log(child.name, child.value);
+        request[child.name] = child.value;
     }
+
+    let res = await API.graphql(graphqlOperation(createBookingRequest, {input: request}));
+    console.log(res);
 };
 
 // Add event listener to run main function on page load
